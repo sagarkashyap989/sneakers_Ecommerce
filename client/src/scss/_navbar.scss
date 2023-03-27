@@ -1,0 +1,146 @@
+@use './utils/' as u;
+
+.header {
+
+    filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+
+    &__navbar {
+        width: 100%;
+        display: grid;
+        gap: u.rem(14);
+        align-items: center;
+        grid-template-columns: 20px auto 20px 20px 28px;
+
+
+
+        @include u.breakpoint-up(medium) {
+            grid-template-columns: 130px auto 20px 20px 28px;
+
+        }
+
+
+        @include u.breakpoint-up(large) {
+            grid-template-columns: 130px auto 20px 20px 28px;
+
+            gap: u.rem(30);
+        }
+    }
+
+
+    &__humburger {
+        display: none;
+
+        svg {
+
+            display: block;
+        }
+
+        @include u.breakpoint-down(small) {
+            display: block;
+        }
+    }
+
+    &__logo {
+        align-self: center;
+
+        @include u.breakpoint-down(small) {
+            // margin-left: u.rem(-16);
+        }
+    }
+
+    &__menu {
+
+        // color: $Grayish_blue;
+        margin-top: 13px;
+
+        a {
+            font-size: u.rem(14);
+            color: $Grayish_blue;
+            transition: color 150ms ease-in-out;
+            position: relative;
+
+            &::before {
+
+                bottom: -20px;
+                content: '';
+                // background-color: $Orange;
+                height: 3px;
+                display: block;
+                position: absolute;
+                width: 100%;
+                left: 0;
+                right: 0;
+                transition: all 150ms ease-in-out;
+
+            }
+
+            &:hover {
+                color: black;
+
+                &::before {
+
+                    background-color: $Orange;
+                }
+            }
+
+
+        }
+
+        @include u.breakpoint-up(medium) {
+            justify-self: center;
+            align-self: start;
+            width: 295px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        @include u.breakpoint-up(large) {
+            // margin-left: u.rem(17);
+
+            max-width: 278px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            justify-self: auto;
+        }
+
+
+
+
+
+
+    }
+
+    // &__cartlogo {}
+
+    &__profile {
+
+        // align-self: end;
+        // justify-self: end;
+        // img {
+        //     width: u.rem(30)
+        // }
+        width: 28px;
+        height: 28px;
+        background-size: cover;
+
+        background-image: url('/images/image-avatar.png');
+
+
+        &:hover {
+            border-radius: 50%;
+            border: 2px solid $Orange;
+            scale: 1.03;
+            // box-sizing: ;
+        }
+
+        @include u.breakpoint-up(medium) {
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+
+
+}

@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://coppergoesland:sagar@cluster0.usujkc2.mongodb.net/?retryWrites=true&w=majority",
+    "privateKey":"sagarkashyap"
+}

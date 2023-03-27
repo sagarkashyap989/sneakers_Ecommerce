@@ -1,0 +1,119 @@
+@use './utils/' as u;
+
+.cart {
+    background-color: hsl(0, 0%, 100%);
+    width: 328px;
+    height:fit-content;
+    max-height:340px;
+    transform: translateX(-50%);
+    display: block;
+    position: absolute; 
+    z-index: 1;
+    left: 50%;
+    top: calc(16px + 60px);
+    border-radius: 15px;
+    max-width: 433px;
+    box-shadow: 0 5px 40px #545151;
+    gap: 7px;
+    padding: 13px;
+    transition: all 200ms ease-in-out;
+
+    @include u.breakpoint-up(medium) {
+        height: fit-content;
+        max-height:340px;
+
+        width: 337px;
+        padding: 10px;
+        transform: none;
+        left: auto;
+        right: 153px;
+    }
+
+    &__title {
+        margin-left: 20px;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+
+  
+    .item_container{
+
+        height:fit-content;
+        height: 204px;
+        overflow-y: scroll;
+
+        div {
+
+
+            display: grid;
+    
+            grid-template-areas: 'img desc desc del'
+                'img price cart__tol del';
+            align-items: center;
+            // padding: 20px;
+            margin-top: 8px;
+    
+    
+    
+    
+            .img {
+                grid-area: img;
+            }
+    
+            .desc {
+                grid-area: desc;
+    
+    
+            }
+    
+            h3,
+            p {
+                color: hsl(219, 9%, 45%);
+                font-size: 16px;
+    
+                margin: 0;
+    
+                span {
+                    color: black;
+                }
+            }
+    
+            .del {
+                grid-area: del;
+                justify-self: end;
+            }
+    
+            .cart__tol {
+                grid-area: tol;
+            }
+    
+    
+    
+            img {
+                width: 60px;
+                height: 60px;
+                border-radius: 5px;
+    
+            }
+    
+    
+        }
+    }
+
+
+
+    button {
+        grid-area: btn;
+        width: 100%;
+        background-color: hsl(26, 100%, 55%);
+        border-radius: 7px;
+        border: none;
+        display: block;
+        margin-top: 10px;
+
+        h3 {
+            color: hsl(0, 0%, 100%);
+        }
+    }
+
+}

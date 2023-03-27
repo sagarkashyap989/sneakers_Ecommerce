@@ -1,0 +1,92 @@
+@use './utils/' as u;
+
+.carousel {
+
+
+    @include u.breakpoint-up(medium) {
+    }
+
+
+    div {
+
+
+
+
+        div {
+            width: 100%;
+            max-width: 801px;
+            // margin:0 !important;
+            margin:auto !important;
+            background-position: center;
+
+            button:first-child {
+                left: 11px;
+            }
+
+            button:last-clild {
+                right: 11px;
+            }
+
+        }
+    }
+
+
+
+
+    &__prev {
+        top: calc(50% - 20px);
+        position: absolute;
+        left: 20px;
+        background: rgb(255 255 255);
+        padding: 20px;
+        border-radius: 50%;
+        opacity: 0.8;
+        transition: opacity 150ms ease-in-out;
+
+        &:hover {
+            opacity: 1;
+
+        }
+
+        svg {
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: block;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    &__next {
+        top: calc(50% - 20px);
+        position: absolute;
+        right: 20px;
+        background: rgb(255 255 255);
+        padding: 20px;
+        border-radius: 50%;
+        opacity: 0.8;
+        transition: opacity 150ms ease-in-out;
+
+
+        &:hover {
+            opacity: 1;
+
+        }
+
+        svg {
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: block;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+
+
+
+}
