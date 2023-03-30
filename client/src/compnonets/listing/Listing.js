@@ -1,9 +1,16 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {PropTypes} from 'prop-types'
 import Lists from './Lists'
+import Spinner from './../layout/spinner'
+import { setPath } from '../../state/action-creators/path'
+const Listing = ({products, loading, setPath}) => {
 
-const Listing = ({products}) => {
+   
+  useEffect(() => {
+    setPath({con:'Products', path:'/'})
+     }, [])
+
  let listing1=[];
  let listing2 =[]
    if(products)
@@ -13,17 +20,18 @@ const Listing = ({products}) => {
 
    console.log(listing2)
    } 
-    return (
-    <>
+    return  loading && products === null? (<Spinner />) :(
+        <>
         <Lists products={listing1}  />
         <Lists  products={listing2} />
     </>
-
- 
     )
+
+    
 }
 
 const mapStateToProps = state =>({
-    products : state.product.products
+    products : state.product.products,
+    loading : state.product.loading
 })
-export default connect(mapStateToProps, {}) (Listing)
+export default connect(mapStateToProps, {setPath}) (Listing)

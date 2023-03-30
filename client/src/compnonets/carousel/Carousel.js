@@ -3,21 +3,14 @@ import SimpleImageSlider from "react-simple-image-slider";
 
 
 
-import img1 from "../../images/introImage-1.webp"
-import img2 from "../../images/image-product-1.jpg"
-import img3 from "../../images/introImage-1.webp"
-import img4 from "../../images/introImage-1.webp"
-
-
-
-const Carousel = ({slideDuration, autoPlay, showBullets ,showNavs }) => {
+const Carousel = ({slideDuration, autoPlay, showBullets ,showNavs, images }) => {
   
-  const images =[img1, img2, img3, img4]
+  // const images =[img1, img2, img3, img4]
    
 
   return (
     <section class={`carousel m-w-[801px]  carousel hide-for-desktop md:hidden `}>
-    {console.log(autoPlay)}
+    {console.log(images, 'imagesds')}
 <div>
       <SimpleImageSlider
         height={317}

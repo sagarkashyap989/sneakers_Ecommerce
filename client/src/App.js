@@ -30,6 +30,11 @@ import setAuthToken from './state/utils/setAuthToken'
 import { useEffect } from 'react';
 import { load_user_cart } from './state/action-creators/regester';
 import { load_products } from './state/action-creators/product';
+import {connect} from 'react-redux'
+import {toggle_cart} from './state/action-creators/toggle'
+import {toggle_overlay} from './state/action-creators/toggle'
+import Overlay from './compnonets/layout/Overlay'
+import Checkout from './compnonets/checkout/Checkout'
 if(localStorage.token){
   setAuthToken(localStorage.token)
 }
@@ -40,17 +45,19 @@ function App() {
 useEffect(() => {
   store.dispatch(load_products())
  store.dispatch(load_user_cart())
-})
-
+},[])
 
   return (
     <Provider store={store}>
     <Router>
-    <div className="App">
+    <div className="App" >
       
-  <div id="overlay"></div>
+  <Overlay />
   {/* //header */}
   <Header />
+
+
+
 <Path/>
 <Alert />
 
@@ -60,6 +67,7 @@ useEffect(() => {
 <Route path='/login' element={<>  <Login/></>}/>
 
 <Route path='/dashboard' element={<Dashboard /> }/>
+<Route path='/checkout' element={<Checkout /> }/>
 <Route path='/' element={<>  
 
 
@@ -68,15 +76,14 @@ useEffect(() => {
     <Sidebar />
 
 
-    <Carousel showBullets={false} slideDuration={0.5} autoPlay={true} showNavs={false}/> 
-
+    
     <Listing/>
 </>}/>
 
 
 
 
-<Route path="/product/:id" element={<><Carousel showBullets={true} slideDuration={0.5} autoPlay={false} showNavs={true}/>
+<Route path="/product/:id" element={<>
 <Hero /></>} />
 
 
@@ -91,4 +98,4 @@ useEffect(() => {
   );
 }
 
-export default App;
+export default (App);

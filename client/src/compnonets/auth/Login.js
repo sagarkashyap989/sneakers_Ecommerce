@@ -4,7 +4,8 @@ import { setAlert } from '../../state/action-creators/alert';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import {login} from '../../state/action-creators/regester'
-const Login = ({setAlert, login, isAuthenticate}) => {
+import { setPath } from '../../state/action-creators/path';
+const Login = ({setAlert, login, isAuthenticate , setPath}) => {
 
   const navigate =  useNavigate();
   useEffect(() => {
@@ -12,6 +13,11 @@ const Login = ({setAlert, login, isAuthenticate}) => {
       navigate('/')
     }
   })
+
+  useEffect(() => {
+ setPath({con:'Login', path:'/login'})
+  }, [])
+  
 
   console.log("isAuthenticate", isAuthenticate)
   const [formData, setFromData] = useState({
@@ -84,4 +90,4 @@ const mapStateToProps = state =>({
   isAuthenticate : state.register.isAuthenticate
 })
 
-export default connect(mapStateToProps, {setAlert, login})(Login)
+export default connect(mapStateToProps, {setAlert, login, setPath})(Login)

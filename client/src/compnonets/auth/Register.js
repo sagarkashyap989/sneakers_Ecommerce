@@ -4,8 +4,8 @@ import { setAlert } from '../../state/action-creators/alert';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import { register } from '../../state/action-creators/regester';
-
-const Register = ({setAlert, isAuthenticate,register}) => {
+import { setPath } from '../../state/action-creators/path';
+const Register = ({setAlert, isAuthenticate,register, setPath} ) => {
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -15,6 +15,9 @@ const Register = ({setAlert, isAuthenticate,register}) => {
   })
   
  
+  useEffect(() => {
+    setPath({con:'Register', path:'/register'})
+     }, [])
  
   const [formData, setFromData] = useState({
     username:'',
@@ -37,7 +40,7 @@ const onChange= (e) =>{
 
 const handleSubmit = (e) =>{
   // e.preventDefault();
-  e.preventDefault();
+  
   if(password !== password2){
     console.log(password, ",", password2)
     setAlert("password do not match", "danger")
@@ -113,4 +116,4 @@ const mapStateToProps = state =>({
   isAuthenticate : state.register.isAuthenticate
 })
 
-export default connect(mapStateToProps, {setAlert, register})(Register)
+export default connect(mapStateToProps, {setAlert, register,setPath})(Register)

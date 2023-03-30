@@ -83,6 +83,10 @@ a:active {
   opacity: 0.7;
 }
 
+#overlay {
+  transition: all 150ms ease-in-out;
+}
+
 @media (max-width: 43.743125em) {
   .hide-for-mobile {
     display: none;
@@ -222,23 +226,36 @@ a:active {
   }
 }
 
+.carousel {
+  background-color: white;
+}
+.carousel div {
+  background-color: white;
+}
+.carousel div button img {
+  filter: invert(100%) sepia(0%) saturate(7479%) hue-rotate(82deg) brightness(99%) contrast(103%) !important;
+}
 .carousel div div {
   width: 100%;
   max-width: 801px;
   margin: auto !important;
-  background-position: center;
+  background-position: center !important;
+  background-size: 70% !important;
+  background-repeat: no-repeat;
 }
 .carousel div div button:first-child {
   left: 11px;
 }
-.carousel div div button:last-clild {
-  right: 11px;
+.carousel div div div:last-child {
+  left: 0% !important;
+  display: flex !important;
+  justify-content: center !important;
 }
 .carousel__prev {
   top: calc(50% - 20px);
   position: absolute;
   left: 20px;
-  background: rgb(255, 255, 255);
+  background: black;
   padding: 20px;
   border-radius: 50%;
   opacity: 0.8;
@@ -260,7 +277,7 @@ a:active {
   top: calc(50% - 20px);
   position: absolute;
   right: 20px;
-  background: rgb(255, 255, 255);
+  background: black;
   padding: 20px;
   border-radius: 50%;
   opacity: 0.8;
@@ -659,4 +676,45 @@ a:active {
   border-radius: 50%;
   opacity: 0.8;
   transition: opacity 150ms ease-in-out;
+}
+
+.checkout .item_container div {
+  display: grid;
+  gap: 4px;
+  grid-template-areas: "img desc desc del" "img price cart__tol del";
+  align-items: center;
+  margin-top: 26px;
+}
+@media (max-width: 43.743125em) {
+  .checkout .item_container div {
+    grid-template-areas: "img desc desc " " price cart__tol del";
+  }
+}
+.checkout .item_container div .img {
+  grid-area: img;
+}
+.checkout .item_container div .desc {
+  grid-area: desc;
+}
+.checkout .item_container div h3,
+.checkout .item_container div p {
+  color: black;
+  font-size: 20px;
+  margin: 0;
+}
+.checkout .item_container div h3 span,
+.checkout .item_container div p span {
+  color: black;
+}
+.checkout .item_container div .del {
+  grid-area: del;
+  justify-self: end;
+}
+.checkout .item_container div .cart__tol {
+  grid-area: tol;
+}
+.checkout .item_container div img {
+  width: 116px;
+  height: 90px;
+  border-radius: 5px;
 }/*# sourceMappingURL=style.css.map */

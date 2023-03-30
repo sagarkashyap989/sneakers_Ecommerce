@@ -4,8 +4,10 @@ import { setAlert } from '../../state/action-creators/alert';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import { login } from '../../state/action-creators/regester'
-import Address from '../dashComponents/Address'
-const Login = ({ setAlert, login, isAuthenticate }) => {
+import Address from '../dashComponents/address/AddressForm'
+import Logout from '../dashComponents/logout/Logout'
+import { setPath } from '../../state/action-creators/path';
+const Login = ({ setAlert, login, isAuthenticate , setPath}) => {
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -14,6 +16,9 @@ const Login = ({ setAlert, login, isAuthenticate }) => {
     }
   })
 
+  useEffect(() => {
+    setPath({con:'Dashoard', path:'/dashboard'})
+     }, [])
   const list = ['Orders', 'Addresses', 'Account Details', 'Log Out']
 
   return (
@@ -29,7 +34,7 @@ const Login = ({ setAlert, login, isAuthenticate }) => {
 
 
         <Address/>
-
+        <Logout/>
         </div>
 
       </div>
@@ -47,4 +52,4 @@ const mapStateToProps = state => ({
   isAuthenticate: state.register.isAuthenticate
 })
 
-export default connect(mapStateToProps, { setAlert, login })(Login)
+export default connect(mapStateToProps, { setAlert, login, setPath })(Login)

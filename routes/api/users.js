@@ -97,7 +97,7 @@ router.put('/address',[auth,
     body('state', 'please enter state name').not().isEmpty(),
     body('zip', 'please enter zip code').not().isEmpty(),]
 ], async(req, res)=>{
-    console.log(req.body)
+    console.log(req.body,'a gift from address')
     const errors =validationResult(req);
     if(!errors.isEmpty()){
         console.log(errors)
@@ -134,8 +134,39 @@ router.put('/address',[auth,
 } )
 
 
+
+
+router.put('/address/:u_id', auth , async(req, res) =>{
+    console.log('is hit')
+    const params= req.params['u_id']
+
+    try {
+        const newAddress = await User.findOneAndUpdate({_id:req.user.id, address:{$elemMatch:{ u_id: params}}},
+            {
+                $set:{
+                    'address.$.f_name':req.body.f_name,
+                    'address.$.l_name':req.body.l_name,
+                    'address.$.address':req.body.address,
+                    'address.$.city':req.body.city,
+                    'address.$.state':req.body.state,
+                    'address.$.zip':req.body.zip,
+                }
+            })
+
+
+            console.log(newAddress, 'newAddress')
+            res.send(req.body)
+    } catch (error) {
+        console.log(error)  
+        res.status(400).send('sever error')
+    }
+})
+
+
+
 router.delete('/address/:u_id', auth, async(req, res) =>{
     const params = req.params['u_id'];
+
     try {
             const newUser=    await User.updateOne( { _id: req.user.id }, {
                 $pull:{

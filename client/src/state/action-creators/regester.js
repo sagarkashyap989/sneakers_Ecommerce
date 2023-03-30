@@ -1,12 +1,63 @@
-import axios from 'axios';
 import { REGISTER_FAIL,LOGIN_FAILED, LOGIN_SUCCESS, REGISTER_SUCCESS,USER_LOADED, AUTH_ERR } from "./types";
 import { setAlert } from './alert';
 import setAuthToken from '../utils/setAuthToken';
+import axios from "axios";
 
+
+
+export const logout = () =>  dispatch =>{
+   console.log("logout ran")
+    dispatch({
+        type:'LOGOUT'
+    })
+}
+
+export const deleteAddress = (u_id) => async dispatch =>{
+    try {
+        const res = await axios.delete(`/api/user/address/${u_id}`)
+
+    console.log(res)
+
+    dispatch({
+        type:'DELETE_ADDRESS',
+        payload: u_id
+    })
+
+    } catch (error) {
+        console.log(error) 
+    }
+}
+
+
+export const updateAddress = (data) => async dispatch =>{
+    const config  = {
+        header :{
+            "Content-type": "application/json"
+        }
+    }
+
+    const body = data;
+    const u_id = data.u_id;
+    try {
+            const res = await axios.put(`/api/user/address/${u_id}`, body, config)
+
+            console.log(res)
+
+            dispatch({
+                type:'UPDATE_ADDRESS',
+                payload:res.data
+
+            })
+
+    } catch (error) {
+        console.log(error)
+    }
+
+}
 
 
 export const addAddress = (data) => async dispatch =>{
-    
+    console.log(data)
     const config  = {
         header :{
             "Content-type": "application/json"
@@ -19,6 +70,10 @@ export const addAddress = (data) => async dispatch =>{
 
     if(res){
         console.log(res.data)
+        dispatch({
+            type:"ADD_ADDRESS",
+            payload:res.data
+        })
     }
 
    } catch (error) {
@@ -118,7 +173,7 @@ export const load_user_cart = () => async dispatch =>{
 
         dispatch({
             type:USER_LOADED,
-            payload: {"user": user.data, "cart": cart.data}
+            payload: {"user": user.data, "cart": cart.data, 'address':user.data.address}
         })
         
     }catch(error){

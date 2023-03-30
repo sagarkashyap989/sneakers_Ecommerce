@@ -7,16 +7,26 @@ import { connect } from 'react-redux'
 import { load_products } from './../../state/action-creators/product';
 import axios from 'axios'
 import { addCart } from '../../state/action-creators/cart'
-
+import { setPathProduct } from '../../state/action-creators/path'
 import { useParams, Link } from 'react-router-dom'
-const Hero = ({ products, liked_id, isAuthenticate, loading, addCart }) => {
+import Spinner from '../layout/spinner'
+import Carousel from '../carousel/Carousel'
+const Hero = ({ products, liked_id, isAuthenticate, loading, addCart, setPathProduct }) => {
   const [currentQuantity, setCurrentQuantity] = useState(1);
   const [totalItem, setTotalItem] = useState(0);
   const [currentSize, setCurrentSize] = useState(0);
 
   const { id } = useParams()
+  const product = products && products.find(element => element._id === id)
+  const { brand, disc, discount, images, likes, name, price, reviews, size, stock, _id } = product ?? {};
+
+  useEffect(() => {
+    setPathProduct({con:name, path:`/product/{u_id}`})
+  }, [products])
+  
+
   if(loading ){
-    return <h1>loading...</h1>
+    return <Spinner />
   }
 
   
@@ -25,10 +35,8 @@ const Hero = ({ products, liked_id, isAuthenticate, loading, addCart }) => {
    
     
   console.log(products)
-  const product = products.find(element => element._id === id)
   console.log(product)
-  const { brand, disc, discount, images, likes, name, price, reviews, size, stock, _id } = product ?? {};
-
+  
   
   console.log(images)
   console.log(isAuthenticate, liked_id, "ldskfjdklfsj;")
@@ -55,34 +63,13 @@ const Hero = ({ products, liked_id, isAuthenticate, loading, addCart }) => {
   const handleSubmit = () =>{
     addCart({id:_id, name, image:images[0], currentSize, currentQuantity, price, totalPrice: price* currentQuantity  })
   }
-  return (
-    <main class="hero container__x relative">
+  return (loading && products !==null) ?(<Spinner/>):( 
+    <>
+      <Carousel showBullets={true} slideDuration={0.5} autoPlay={false} showNavs={true} images={images}/>
+      
+    </>
+  ) }
 
-     <div className=" justify-center w-[100%] flex gap-6">
-
-<Slider img={images} />
-
-
-<div class="hero__col2">
-
-
-  <Iteminfo brand={brand} id={_id} name={name} price={price} discount={discount} liked={isLiked} />
-
-
-  <Size currentSize={currentSize} handleQuantity={handleQuantity} handleSize={handleSize} />
-
-
-  <Price quantity={currentQuantity} handleQuantity={handleQuantity}  handleSubmit={handleSubmit}/>
-
-
-
-</div>
-
-</div>
-
-    </main>
-  )
-}
 
 
 
@@ -93,4 +80,4 @@ const mapStateToProps = state => ({
   loading: state.product.loading
 })
 
-export default connect(mapStateToProps, {addCart})(Hero)
+export default connect(mapStateToProps, {addCart, setPathProduct})(Hero)

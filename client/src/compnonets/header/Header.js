@@ -2,13 +2,14 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import {connect} from 'react-redux'
 import { toggle_cart } from '../../state/action-creators/toggle';
+import { toggle_overlay } from '../../state/action-creators/toggle';
 
 import Badge from '@mui/material/Badge';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import {AiOutlineShoppingCart} from 'react-icons/ai'
-const Header = ({cart, authenticate, toggle_cart}) => {
+const Header = ({cart, authenticate, toggle_cart ,toggleCart, toggle_overlay, toggleOverlay}) => {
   const theme = createTheme({
     components: {
       MuiBadge: {
@@ -65,7 +66,7 @@ const Header = ({cart, authenticate, toggle_cart}) => {
 
         </div>  
 
-        <div onClick={() => toggle_cart()} id="cartbtn" class="header__cartlogo">
+        <div onClick={() => {toggle_cart(!toggleCart); toggle_overlay(!toggleOverlay)}} id="cartbtn" class="header__cartlogo">
 
         
     
@@ -123,7 +124,9 @@ const Header = ({cart, authenticate, toggle_cart}) => {
 const mapStateToProps = state =>({
   
   cart: state.register.cart,
-  authenticate: state.register.isAuthenticate
+  authenticate: state.register.isAuthenticate,   
+  toggleCart: state.toggle.toggleCart,
+  toggleOverlay: state.toggle.toggleOverlay,
 })
 
-export default connect(mapStateToProps,{toggle_cart})(Header)
+export default connect(mapStateToProps,{toggle_cart, toggle_overlay})(Header)

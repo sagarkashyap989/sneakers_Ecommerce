@@ -1,3 +1,4 @@
+// eslint-disable-next-line 
 import { REGISTER_FAIL,LOGIN_SUCCESS, LOGIN_FAILED, REGISTER_SUCCESS, USER_LOADED, AUTH_ERR } from "../action-creators/types"
 
 const initialState = {
@@ -5,14 +6,55 @@ const initialState = {
     token:localStorage.getItem('token'),
     loading:true,
     user:null,
-    cart:null
+    cart:null,
+    address:null
 }
 
-
-export default function(state= initialState, action){
+// eslint-disable-next-line 
+export default function(state= initialState, action) {
     const {type, payload}  = action;
 
     switch(type){
+
+        case 'DELETE_ADDRESS':
+            return{
+                ...state,
+                address:[...state.address.filter(item =>{
+                    if(item.u_id !== payload){
+                        return item
+                    }
+                })]
+            }
+        case 'UPDATE_ADDRESS':
+            console.log(payload)
+            console.log([...state.address.filter( item =>{
+                console.log(item.f_name)
+                if(item.u_id === payload.u_id){
+                    console.log('is matched')
+                    Object.assign(item, payload);
+                }
+                    return item
+                
+            })])
+            return{
+                ...state,
+                address:[...state.address.filter( item =>{
+                    console.log(item.f_name)
+                    if(item.u_id === payload.u_id){
+                        console.log('is matched')
+                        return payload
+                    }else{
+                        return item
+                    }
+                })]
+            }
+
+        case 'ADD_ADDRESS': 
+         return{
+            ...state,
+            address:[...state.address, payload]
+         }
+
 
 
         case 'DELETE_CART':
@@ -23,9 +65,12 @@ export default function(state= initialState, action){
                     
                     console.log(item.u_id === payload)
                     console.log(item.u_id, " =", payload)
+                    // eslint-disable-next-line 
                     if(item.u_id !== payload){
                         return item
                     }
+
+                    return 0
                 })]
             }
 
@@ -56,6 +101,8 @@ export default function(state= initialState, action){
             }
         case USER_LOADED:
             // console.log("userLoaded run")
+            
+            console.log(payload)    
             return{
                 ...state,
                 ...payload,
@@ -75,6 +122,7 @@ export default function(state= initialState, action){
         case LOGIN_FAILED:
         case AUTH_ERR:
         case REGISTER_FAIL:
+        case 'LOGOUT':    
             localStorage.removeItem('token')
             return{
                 ...state,
@@ -82,7 +130,8 @@ export default function(state= initialState, action){
                 isAuthenticate:false,
                 token:null,
                 user:null,
-                cart:null
+                cart:null,
+                address: null
             }  
             
         default:

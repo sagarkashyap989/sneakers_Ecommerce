@@ -1,12 +1,19 @@
 const initialState  = {
-    toggleCart: false
+    toggleCart: false, 
+    toggleOverlay:false
 };
 
 export default function ( state= initialState, action) {
     const {type, payload} = action;
     switch (type) {
+        
+        case 'TOGGLE_OVERLAY':
+            console.log(payload)
+            return{...state, toggleOverlay: payload} 
+          
         case 'TOGGLE_CART':
-            return{...state, toggleCart: !state.toggleCart} 
+            console.log(payload)
+            return{...state, toggleCart: payload} 
             break;
     
         default:
