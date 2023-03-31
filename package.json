@@ -8,7 +8,6 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "build": "react-scripts build"
-
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +22,7 @@
     "moment": "^2.29.4",
     "mongoose": "^7.0.0",
     "react-router-dom": "^6.9.0",
+    "react-scripts": "^5.0.1",
     "request": "^2.88.2",
     "sneaks-api": "^1.2.3",
     "uuid": "^9.0.0"
