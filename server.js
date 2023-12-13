@@ -16,6 +16,7 @@ connectDB();
 app.use(express.json({extended: false}));
 
 let codeSnippet = `
+link : https://colab.research.google.com/drive/1Oy2VKFTUuxyUuOvKkL81Z-AndrDfFkvj?authuser=5#scrollTo=tuE_Tl-ZOo6V <br/>
 #1a
 
 import queue as Q
