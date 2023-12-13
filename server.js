@@ -62,7 +62,7 @@ x_pred == y
 
 // Convert the code snippet to a string
 let codeString = String(codeSnippet);
-app.get('/', (req,res) => res.send(codeString));
+app.get('/', (req,res) => res.send(codeSnippet));
 
 //define routes
 
